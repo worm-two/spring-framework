@@ -1,20 +1,20 @@
 package cn.ming.springframework.beans.factory.support;
 
-import cn.bugstack.springframework.beans.BeansException;
-import cn.bugstack.springframework.beans.factory.DisposableBean;
-import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
+
 import cn.hutool.core.util.StrUtil;
+import cn.ming.springframework.beans.BeansException;
+import cn.ming.springframework.beans.factory.DisposableBean;
+import cn.ming.springframework.beans.factory.config.BeanDefinition;
 
 import java.lang.reflect.Method;
 
+
 /**
- * @author 小傅哥，微信：fustack
- * @description Adapter that implements the {@link DisposableBean} and {@link Runnable} interfaces
- * performing various destruction steps on a given bean instance:
- * @date 2022/3/10
- * @github https://github.com/fuzhengwei/CodeDesignTutorials
- * @Copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description:
+ **/
 public class DisposableBeanAdapter implements DisposableBean {
 
     private final Object bean;
@@ -33,7 +33,6 @@ public class DisposableBeanAdapter implements DisposableBean {
         if (bean instanceof DisposableBean) {
             ((DisposableBean) bean).destroy();
         }
-
         // 2. 注解配置 destroy-method {判断是为了避免二次执行销毁}
         if (StrUtil.isNotEmpty(destroyMethodName) && !(bean instanceof DisposableBean && "destroy".equals(this.destroyMethodName))) {
             Method destroyMethod = bean.getClass().getMethod(destroyMethodName);
@@ -42,7 +41,5 @@ public class DisposableBeanAdapter implements DisposableBean {
             }
             destroyMethod.invoke(bean);
         }
-        
     }
-
 }

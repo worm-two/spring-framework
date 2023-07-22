@@ -1,34 +1,31 @@
 package cn.ming.springframework.beans.factory.support;
 
-import cn.bugstack.springframework.beans.BeansException;
-import cn.bugstack.springframework.beans.factory.FactoryBean;
-import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
-import cn.bugstack.springframework.beans.factory.config.BeanPostProcessor;
-import cn.bugstack.springframework.beans.factory.config.ConfigurableBeanFactory;
-import cn.bugstack.springframework.util.ClassUtils;
-import cn.bugstack.springframework.util.StringValueResolver;
+
+import cn.ming.springframework.beans.BeansException;
+import cn.ming.springframework.beans.factory.FactoryBean;
+import cn.ming.springframework.beans.factory.config.BeanDefinition;
+import cn.ming.springframework.beans.factory.config.BeanPostProcessor;
+import cn.ming.springframework.beans.factory.config.ConfigurableBeanFactory;
+import cn.ming.springframework.util.ClassUtils;
+import cn.ming.springframework.util.StringValueResolver;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * @author 小傅哥，微信：fustack
- * @description 抽象的 Bean 工厂基类，定义模板方法
- * @date 2022/03/07
- * @github https://github.com/fuzhengwei
- * @copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description: 抽象的 Bean 工厂基类，定义模板方法
+ **/
 public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport implements ConfigurableBeanFactory {
 
-    /** ClassLoader to resolve bean class names with, if necessary */
+
     private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
 
-    /** BeanPostProcessors to apply in createBean */
-    private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<BeanPostProcessor>();
+    private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
 
-    /**
-     * String resolvers to apply e.g. to annotation attribute values
-     */
     private final List<StringValueResolver> embeddedValueResolvers = new ArrayList<>();
 
     @Override
@@ -78,7 +75,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
     protected abstract Object createBean(String beanName, BeanDefinition beanDefinition, Object[] args);
 
     @Override
-    public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor){
+    public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor) {
         this.beanPostProcessors.remove(beanPostProcessor);
         this.beanPostProcessors.add(beanPostProcessor);
     }
@@ -97,10 +94,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
         return result;
     }
 
-    /**
-     * Return the list of BeanPostProcessors that will get applied
-     * to beans created with this factory.
-     */
+
     public List<BeanPostProcessor> getBeanPostProcessors() {
         return this.beanPostProcessors;
     }

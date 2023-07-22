@@ -1,26 +1,25 @@
 package cn.ming.springframework.beans.factory.support;
 
-import cn.bugstack.springframework.beans.BeansException;
-import cn.bugstack.springframework.beans.factory.DisposableBean;
-import cn.bugstack.springframework.beans.factory.config.SingletonBeanRegistry;
+
+
+import cn.ming.springframework.beans.BeansException;
+import cn.ming.springframework.beans.factory.DisposableBean;
+import cn.ming.springframework.beans.factory.config.SingletonBeanRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+
 /**
- * @author 小傅哥，微信：fustack
- * @description 通用的注册表实现
- * @date 2022/03/07
- * @github https://github.com/fuzhengwei
- * @copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description: 通用的注册表实现
+ **/
 public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
 
-    /**
-     * Internal marker for a null singleton object:
-     * used as marker value for concurrent Maps (which don't support null values).
-     */
+
     protected static final Object NULL_OBJECT = new Object();
 
     private Map<String, Object> singletonObjects = new HashMap<>();

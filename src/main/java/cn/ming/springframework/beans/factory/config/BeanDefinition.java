@@ -1,14 +1,18 @@
 package cn.ming.springframework.beans.factory.config;
 
-import cn.bugstack.springframework.beans.PropertyValues;
+
+import cn.ming.springframework.beans.PropertyValues;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * @author 小傅哥，微信：fustack
- * @description 定义 Bean 实例信息
- * @date 2022/03/07
- * @github https://github.com/fuzhengwei
- * @copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description: 定义 Bean 实例信息
+ **/
+@Getter
+@Setter
 public class BeanDefinition {
 
     String SCOPE_SINGLETON = ConfigurableBeanFactory.SCOPE_SINGLETON;
@@ -43,45 +47,4 @@ public class BeanDefinition {
         this.singleton = SCOPE_SINGLETON.equals(scope);
         this.prototype = SCOPE_PROTOTYPE.equals(scope);
     }
-
-    public boolean isSingleton() {
-        return singleton;
-    }
-
-    public boolean isPrototype() {
-        return prototype;
-    }
-
-    public Class getBeanClass() {
-        return beanClass;
-    }
-
-    public void setBeanClass(Class beanClass) {
-        this.beanClass = beanClass;
-    }
-
-    public PropertyValues getPropertyValues() {
-        return propertyValues;
-    }
-
-    public void setPropertyValues(PropertyValues propertyValues) {
-        this.propertyValues = propertyValues;
-    }
-
-    public String getInitMethodName() {
-        return initMethodName;
-    }
-
-    public void setInitMethodName(String initMethodName) {
-        this.initMethodName = initMethodName;
-    }
-
-    public String getDestroyMethodName() {
-        return destroyMethodName;
-    }
-
-    public void setDestroyMethodName(String destroyMethodName) {
-        this.destroyMethodName = destroyMethodName;
-    }
-
 }

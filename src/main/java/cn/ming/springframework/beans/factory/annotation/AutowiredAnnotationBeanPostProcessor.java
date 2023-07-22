@@ -1,26 +1,24 @@
 package cn.ming.springframework.beans.factory.annotation;
 
-import cn.bugstack.springframework.beans.BeansException;
-import cn.bugstack.springframework.beans.PropertyValues;
-import cn.bugstack.springframework.beans.factory.BeanFactory;
-import cn.bugstack.springframework.beans.factory.BeanFactoryAware;
-import cn.bugstack.springframework.beans.factory.ConfigurableListableBeanFactory;
-import cn.bugstack.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
-import cn.bugstack.springframework.util.ClassUtils;
+
 import cn.hutool.core.bean.BeanUtil;
+import cn.ming.springframework.beans.BeansException;
+import cn.ming.springframework.beans.PropertyValues;
+import cn.ming.springframework.beans.factory.BeanFactory;
+import cn.ming.springframework.beans.factory.BeanFactoryAware;
+import cn.ming.springframework.beans.factory.ConfigurableListableBeanFactory;
+import cn.ming.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import cn.ming.springframework.util.ClassUtils;
 
 import java.lang.reflect.Field;
 
+
 /**
- * @author 小傅哥，微信：fustack
- * @description 处理 @Value、@Autowired，注解的 BeanPostProcessor {@link cn.bugstack.springframework.beans.factory.config.BeanPostProcessor} implementation
- * that autowires annotated fields, setter methods and arbitrary config methods.
- * Such members to be injected are detected through a Java 5 annotation: by default,
- * Spring's {@link Autowired @Autowired} and {@link Value @Value} annotations.
- * @date 2022/3/15
- * @github https://github.com/fuzhengwei/CodeDesignTutorials
- * @Copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description: 处理 @Value、@Autowired，注解的 BeanPostProcessor
+ **/
 public class AutowiredAnnotationBeanPostProcessor implements InstantiationAwareBeanPostProcessor, BeanFactoryAware {
 
     private ConfigurableListableBeanFactory beanFactory;

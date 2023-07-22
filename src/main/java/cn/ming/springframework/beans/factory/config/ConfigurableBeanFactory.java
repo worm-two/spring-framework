@@ -1,18 +1,15 @@
 package cn.ming.springframework.beans.factory.config;
 
-import cn.bugstack.springframework.beans.factory.HierarchicalBeanFactory;
-import cn.bugstack.springframework.util.StringValueResolver;
+
+import cn.ming.springframework.beans.factory.HierarchicalBeanFactory;
+import cn.ming.springframework.util.StringValueResolver;
 
 /**
- * @author 小傅哥，微信：fustack
- * @description Configuration interface to be implemented by most bean factories. Provides
- * facilities to configure a bean factory, in addition to the bean factory
- * client methods in the {@link cn.bugstack.springframework.beans.factory.BeanFactory}
- * interface.
- * @date 2022/3/9
- * @github https://github.com/fuzhengwei
- * @copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description:
+ **/
 public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, SingletonBeanRegistry {
 
     String SCOPE_SINGLETON = "singleton";
@@ -26,19 +23,8 @@ public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, Single
      */
     void destroySingletons();
 
-    /**
-     * Add a String resolver for embedded values such as annotation attributes.
-     * @param valueResolver the String resolver to apply to embedded values
-     * @since 3.0
-     */
     void addEmbeddedValueResolver(StringValueResolver valueResolver);
 
-    /**
-     * Resolve the given embedded value, e.g. an annotation attribute.
-     * @param value the value to resolve
-     * @return the resolved value (may be the original value as-is)
-     * @since 3.0
-     */
     String resolveEmbeddedValue(String value);
 
 }

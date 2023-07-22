@@ -1,19 +1,20 @@
 package cn.ming.springframework.beans.factory.support;
 
-import cn.bugstack.springframework.beans.BeansException;
-import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
+
+import cn.ming.springframework.beans.BeansException;
+import cn.ming.springframework.beans.factory.config.BeanDefinition;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.NoOp;
 
 import java.lang.reflect.Constructor;
 
+
 /**
- * @author 小傅哥，微信：fustack
- * @description Cglib 实例化策略
- * @date 2022/03/08
- * @github https://github.com/fuzhengwei
- * @copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description: Cglib 实例化策略
+ **/
 public class CglibSubclassingInstantiationStrategy implements InstantiationStrategy{
 
     @Override
