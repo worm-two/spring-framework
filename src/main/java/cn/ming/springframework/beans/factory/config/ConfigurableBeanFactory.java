@@ -2,7 +2,9 @@ package cn.ming.springframework.beans.factory.config;
 
 
 import cn.ming.springframework.beans.factory.HierarchicalBeanFactory;
+import cn.ming.springframework.core.convert.ConversionService;
 import cn.ming.springframework.util.StringValueResolver;
+import com.sun.istack.internal.Nullable;
 
 /**
  * @Author: xuming
@@ -26,5 +28,12 @@ public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, Single
     void addEmbeddedValueResolver(StringValueResolver valueResolver);
 
     String resolveEmbeddedValue(String value);
+
+
+    void setConversionService(ConversionService conversionService);
+
+    @Nullable
+    ConversionService getConversionService();
+
 
 }

@@ -1,9 +1,6 @@
 package cn.ming.springframework;
 
 
-import cn.ming.springframework.bean.Husband;
-import cn.ming.springframework.bean.IUserService;
-import cn.ming.springframework.bean.Wife;
 import cn.ming.springframework.context.support.ClassPathXmlApplicationContext;
 import org.junit.jupiter.api.Test;
 

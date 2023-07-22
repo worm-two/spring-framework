@@ -3,11 +3,13 @@ package cn.ming.springframework.beans.factory.support;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.util.TypeUtil;
 import cn.ming.springframework.beans.BeansException;
 import cn.ming.springframework.beans.PropertyValue;
 import cn.ming.springframework.beans.PropertyValues;
 import cn.ming.springframework.beans.factory.*;
 import cn.ming.springframework.beans.factory.config.*;
+import cn.ming.springframework.core.convert.ConversionService;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -105,7 +107,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
     }
 
-    private void applyPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) {
+    protected void applyPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) {
         try {
             PropertyValues propertyValues = beanDefinition.getPropertyValues();
             for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
@@ -118,11 +120,23 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                     BeanReference beanReference = (BeanReference) value;
                     value = getBean(beanReference.getBeanName());
                 }
-                // 属性填充
+                // 类型转换
+                else {
+                    Class<?> sourceType = value.getClass();
+                    Class<?> targetType = (Class<?>) TypeUtil.getFieldType(bean.getClass(), name);
+                    ConversionService conversionService = getConversionService();
+                    if (conversionService != null) {
+                        if (conversionService.canConvert(sourceType, targetType)) {
+                            value = conversionService.convert(value, targetType);
+                        }
+                    }
+                }
+
+                // 反射设置属性填充
                 BeanUtil.setFieldValue(bean, name, value);
             }
         } catch (Exception e) {
-            throw new BeansException("Error setting property values：" + beanName);
+            throw new BeansException("Error setting property values：" + beanName + " message：" + e);
         }
     }
 
