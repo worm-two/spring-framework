@@ -1,28 +1,27 @@
 package cn.ming.springframework.aop.framework.autoproxy;
 
-import cn.bugstack.springframework.aop.*;
-import cn.bugstack.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor;
-import cn.bugstack.springframework.aop.framework.ProxyFactory;
-import cn.bugstack.springframework.beans.BeansException;
-import cn.bugstack.springframework.beans.PropertyValues;
-import cn.bugstack.springframework.beans.factory.BeanFactory;
-import cn.bugstack.springframework.beans.factory.BeanFactoryAware;
-import cn.bugstack.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
-import cn.bugstack.springframework.beans.factory.support.DefaultListableBeanFactory;
+
+import cn.ming.springframework.aop.*;
+import cn.ming.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor;
+import cn.ming.springframework.aop.framework.ProxyFactory;
+import cn.ming.springframework.beans.BeansException;
+import cn.ming.springframework.beans.PropertyValues;
+import cn.ming.springframework.beans.factory.BeanFactory;
+import cn.ming.springframework.beans.factory.BeanFactoryAware;
+import cn.ming.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import cn.ming.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.MethodInterceptor;
 
 import java.util.Collection;
 
+
 /**
- * @author 小傅哥，微信：fustack
- * @description BeanPostProcessor implementation that creates AOP proxies based on all candidate
- * Advisors in the current BeanFactory. This class is completely generic; it contains
- * no special code to handle any particular aspects, such as pooling aspects.
- * @date 2022/3/14
- * @github https://github.com/fuzhengwei/CodeDesignTutorials
- * @Copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description:
+ **/
 public class DefaultAdvisorAutoProxyCreator implements InstantiationAwareBeanPostProcessor, BeanFactoryAware {
 
     private DefaultListableBeanFactory beanFactory;

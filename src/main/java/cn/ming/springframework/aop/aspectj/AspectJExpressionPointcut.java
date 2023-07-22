@@ -1,8 +1,9 @@
 package cn.ming.springframework.aop.aspectj;
 
-import cn.bugstack.springframework.aop.ClassFilter;
-import cn.bugstack.springframework.aop.MethodMatcher;
-import cn.bugstack.springframework.aop.Pointcut;
+
+import cn.ming.springframework.aop.ClassFilter;
+import cn.ming.springframework.aop.MethodMatcher;
+import cn.ming.springframework.aop.Pointcut;
 import org.aspectj.weaver.tools.PointcutExpression;
 import org.aspectj.weaver.tools.PointcutParser;
 import org.aspectj.weaver.tools.PointcutPrimitive;
@@ -12,18 +13,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Spring {@link cn.bugstack.springframework.aop.Pointcut} implementation
- * that uses the AspectJ weaver to evaluate a pointcut expression.
- * <p>
- * 切点表达式
- * <p>
- * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- * 公众号：bugstack虫洞栈
- * Create by 小傅哥(fustack)
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description: 切点表达式
+ **/
 public class AspectJExpressionPointcut implements Pointcut, ClassFilter, MethodMatcher {
 
-    private static final Set<PointcutPrimitive> SUPPORTED_PRIMITIVES = new HashSet<PointcutPrimitive>();
+    private static final Set<PointcutPrimitive> SUPPORTED_PRIMITIVES = new HashSet<>();
 
     static {
         SUPPORTED_PRIMITIVES.add(PointcutPrimitive.EXECUTION);

@@ -1,29 +1,25 @@
 package cn.ming.springframework.aop.framework;
 
-import cn.bugstack.springframework.aop.AdvisedSupport;
+
+import cn.ming.springframework.aop.AdvisedSupport;
+import lombok.AllArgsConstructor;
 import org.aopalliance.intercept.MethodInterceptor;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+
 /**
- * JDK-based {@link AopProxy} implementation for the Spring AOP framework,
- * based on JDK {@link Proxy dynamic proxies}.
- * <p>
- * JDK 动态代理
- * <p>
- * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- * 公众号：bugstack虫洞栈
- * Create by 小傅哥(fustack)
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description: JDK 动态代理
+ **/
+@AllArgsConstructor
 public class JdkDynamicAopProxy implements AopProxy, InvocationHandler {
 
     private final AdvisedSupport advised;
-
-    public JdkDynamicAopProxy(AdvisedSupport advised) {
-        this.advised = advised;
-    }
 
     @Override
     public Object getProxy() {

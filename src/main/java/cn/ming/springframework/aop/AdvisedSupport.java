@@ -1,5 +1,7 @@
 package cn.ming.springframework.aop;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.aopalliance.intercept.MethodInterceptor;
 
 /**
@@ -8,6 +10,8 @@ import org.aopalliance.intercept.MethodInterceptor;
  * @Version: 1.0
  * @Description:
  **/
+@Getter
+@Setter
 public class AdvisedSupport {
 
     // ProxyConfig
@@ -18,36 +22,4 @@ public class AdvisedSupport {
     private MethodInterceptor methodInterceptor;
     // 方法匹配器(检查目标方法是否符合通知条件)
     private MethodMatcher methodMatcher;
-
-    public boolean isProxyTargetClass() {
-        return proxyTargetClass;
-    }
-
-    public void setProxyTargetClass(boolean proxyTargetClass) {
-        this.proxyTargetClass = proxyTargetClass;
-    }
-
-    public TargetSource getTargetSource() {
-        return targetSource;
-    }
-
-    public void setTargetSource(TargetSource targetSource) {
-        this.targetSource = targetSource;
-    }
-
-    public MethodInterceptor getMethodInterceptor() {
-        return methodInterceptor;
-    }
-
-    public void setMethodInterceptor(MethodInterceptor methodInterceptor) {
-        this.methodInterceptor = methodInterceptor;
-    }
-
-    public MethodMatcher getMethodMatcher() {
-        return methodMatcher;
-    }
-
-    public void setMethodMatcher(MethodMatcher methodMatcher) {
-        this.methodMatcher = methodMatcher;
-    }
 }
