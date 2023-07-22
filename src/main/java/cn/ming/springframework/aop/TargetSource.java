@@ -1,6 +1,7 @@
 package cn.ming.springframework.aop;
 
 
+import cn.ming.springframework.util.ClassUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -17,6 +18,8 @@ public class TargetSource {
     private final Object target;
 
     public Class<?>[] getTargetClass() {
-        return this.target.getClass().getInterfaces();
+        Class<?> clazz = this.target.getClass();
+        clazz = ClassUtils.isCglibProxyClass(clazz) ? clazz.getSuperclass() : clazz;
+        return clazz.getInterfaces();
     }
 }
