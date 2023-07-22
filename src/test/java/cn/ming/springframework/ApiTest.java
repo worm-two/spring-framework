@@ -1,10 +1,17 @@
 package cn.ming.springframework;
 
-/**
- * @Author: xuming
- * @Date: 2023-07-22 10:42
- * @Version: 1.0
- * @Description: TODO
- **/
+
+import cn.ming.springframework.bean.IUserService;
+import cn.ming.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.jupiter.api.Test;
+
 public class ApiTest {
+
+    @Test
+    public void test_scan() {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        IUserService userService = applicationContext.getBean("userService", IUserService.class);
+        System.out.println("测试结果：" + userService.queryUserInfo());
+    }
+
 }

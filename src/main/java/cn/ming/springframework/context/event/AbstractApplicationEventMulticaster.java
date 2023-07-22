@@ -8,6 +8,7 @@ import cn.ming.springframework.context.ApplicationEvent;
 import cn.ming.springframework.context.ApplicationListener;
 import cn.ming.springframework.util.ClassUtils;
 
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.LinkedHashSet;
