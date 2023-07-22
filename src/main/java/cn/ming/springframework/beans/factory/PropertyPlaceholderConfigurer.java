@@ -1,36 +1,29 @@
 package cn.ming.springframework.beans.factory;
 
-import cn.bugstack.springframework.beans.BeansException;
-import cn.bugstack.springframework.beans.PropertyValue;
-import cn.bugstack.springframework.beans.PropertyValues;
-import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
-import cn.bugstack.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import cn.bugstack.springframework.core.io.DefaultResourceLoader;
-import cn.bugstack.springframework.core.io.Resource;
-import cn.bugstack.springframework.util.StringValueResolver;
+import cn.ming.springframework.beans.BeansException;
+import cn.ming.springframework.beans.PropertyValue;
+import cn.ming.springframework.beans.PropertyValues;
+import cn.ming.springframework.beans.factory.config.BeanDefinition;
+import cn.ming.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import cn.ming.springframework.core.io.DefaultResourceLoader;
+import cn.ming.springframework.core.io.Resource;
+import cn.ming.springframework.util.StringValueResolver;
 
 import java.io.IOException;
 import java.util.Properties;
 
 /**
- * @author 小傅哥，微信：fustack
- * @description Allows for configuration of individual bean property values from a property resource,
- * i.e. a properties file. Useful for custom config files targeted at system
- * administrators that override bean properties configured in the application context.
- * @date 2022/3/14
- * @github https://github.com/fuzhengwei
- * @copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description:
+ **/
 public class PropertyPlaceholderConfigurer implements BeanFactoryPostProcessor {
 
-    /**
-     * Default placeholder prefix: {@value}
-     */
+
     public static final String DEFAULT_PLACEHOLDER_PREFIX = "${";
 
-    /**
-     * Default placeholder suffix: {@value}
-     */
+
     public static final String DEFAULT_PLACEHOLDER_SUFFIX = "}";
 
     private String location;

@@ -1,15 +1,16 @@
 package cn.ming.springframework.beans.factory.xml;
 
-import cn.bugstack.springframework.beans.BeansException;
-import cn.bugstack.springframework.beans.PropertyValue;
-import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
-import cn.bugstack.springframework.beans.factory.config.BeanReference;
-import cn.bugstack.springframework.beans.factory.support.AbstractBeanDefinitionReader;
-import cn.bugstack.springframework.beans.factory.support.BeanDefinitionRegistry;
-import cn.bugstack.springframework.context.annotation.ClassPathBeanDefinitionScanner;
-import cn.bugstack.springframework.core.io.Resource;
-import cn.bugstack.springframework.core.io.ResourceLoader;
+
 import cn.hutool.core.util.StrUtil;
+import cn.ming.springframework.beans.BeansException;
+import cn.ming.springframework.beans.PropertyValue;
+import cn.ming.springframework.beans.factory.config.BeanDefinition;
+import cn.ming.springframework.beans.factory.config.BeanReference;
+import cn.ming.springframework.beans.factory.support.AbstractBeanDefinitionReader;
+import cn.ming.springframework.beans.factory.support.BeanDefinitionRegistry;
+import cn.ming.springframework.context.annotation.ClassPathBeanDefinitionScanner;
+import cn.ming.springframework.core.io.Resource;
+import cn.ming.springframework.core.io.ResourceLoader;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -20,12 +21,11 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * @author 小傅哥，微信：fustack
- * @description Bean definition reader for XML bean definitions.| 本章节修改为 dom4j 处理 xml
- * @date 2022/3/9
- * @github https://github.com/fuzhengwei
- * @copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description:
+ **/
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
     public XmlBeanDefinitionReader(BeanDefinitionRegistry registry) {
