@@ -2,7 +2,7 @@ package cn.ming.springframework.util;
 
 
 import cn.hutool.core.lang.Assert;
-import org.jetbrains.annotations.Nullable;
+import com.sun.istack.internal.Nullable;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
