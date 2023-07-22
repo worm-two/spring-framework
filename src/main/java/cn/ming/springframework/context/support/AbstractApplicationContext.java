@@ -1,31 +1,28 @@
 package cn.ming.springframework.context.support;
 
-import cn.bugstack.springframework.beans.BeansException;
-import cn.bugstack.springframework.beans.factory.ConfigurableListableBeanFactory;
-import cn.bugstack.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import cn.bugstack.springframework.beans.factory.config.BeanPostProcessor;
-import cn.bugstack.springframework.context.ApplicationEvent;
-import cn.bugstack.springframework.context.ApplicationListener;
-import cn.bugstack.springframework.context.ConfigurableApplicationContext;
-import cn.bugstack.springframework.context.event.ApplicationEventMulticaster;
-import cn.bugstack.springframework.context.event.ContextClosedEvent;
-import cn.bugstack.springframework.context.event.ContextRefreshedEvent;
-import cn.bugstack.springframework.context.event.SimpleApplicationEventMulticaster;
-import cn.bugstack.springframework.core.io.DefaultResourceLoader;
+
+import cn.ming.springframework.beans.BeansException;
+import cn.ming.springframework.beans.factory.ConfigurableListableBeanFactory;
+import cn.ming.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import cn.ming.springframework.beans.factory.config.BeanPostProcessor;
+import cn.ming.springframework.context.ApplicationEvent;
+import cn.ming.springframework.context.ApplicationListener;
+import cn.ming.springframework.context.ConfigurableApplicationContext;
+import cn.ming.springframework.context.event.ApplicationEventMulticaster;
+import cn.ming.springframework.context.event.ContextClosedEvent;
+import cn.ming.springframework.context.event.ContextRefreshedEvent;
+import cn.ming.springframework.context.event.SimpleApplicationEventMulticaster;
+import cn.ming.springframework.core.io.DefaultResourceLoader;
 
 import java.util.Collection;
 import java.util.Map;
 
 /**
- * @author 小傅哥，微信：fustack
- * @description 抽象应用上下文 Abstract implementation of the {@link cn.bugstack.springframework.context.ApplicationContext}
- * interface. Doesn't mandate the type of storage used for configuration; simply
- * implements common context functionality. Uses the Template Method design pattern,
- * requiring concrete subclasses to implement abstract methods.
- * @date 2022/3/10
- * @github https://github.com/fuzhengwei
- * @copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description: 抽象应用上下文
+ **/
 public abstract class AbstractApplicationContext extends DefaultResourceLoader implements ConfigurableApplicationContext {
 
     public static final String APPLICATION_EVENT_MULTICASTER_BEAN_NAME = "applicationEventMulticaster";

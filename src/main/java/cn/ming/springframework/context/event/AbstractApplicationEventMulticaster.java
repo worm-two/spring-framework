@@ -1,13 +1,13 @@
 package cn.ming.springframework.context.event;
 
-import cn.bugstack.springframework.beans.BeansException;
-import cn.bugstack.springframework.beans.factory.BeanFactory;
-import cn.bugstack.springframework.beans.factory.BeanFactoryAware;
-import cn.bugstack.springframework.context.ApplicationEvent;
-import cn.bugstack.springframework.context.ApplicationListener;
-import cn.bugstack.springframework.util.ClassUtils;
 
-import java.lang.reflect.ParameterizedType;
+import cn.ming.springframework.beans.BeansException;
+import cn.ming.springframework.beans.factory.BeanFactory;
+import cn.ming.springframework.beans.factory.BeanFactoryAware;
+import cn.ming.springframework.context.ApplicationEvent;
+import cn.ming.springframework.context.ApplicationListener;
+import cn.ming.springframework.util.ClassUtils;
+
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -15,13 +15,11 @@ import java.util.LinkedList;
 import java.util.Set;
 
 /**
- * @author 小傅哥，微信：fustack
- * @description Abstract implementation of the {@link ApplicationEventMulticaster} interface,
- * providing the basic listener registration facility.
- * @date 2022/3/13
- * @github https://github.com/fuzhengwei/CodeDesignTutorials
- * @Copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description:
+ **/
 public abstract class AbstractApplicationEventMulticaster implements ApplicationEventMulticaster, BeanFactoryAware {
 
     public final Set<ApplicationListener<ApplicationEvent>> applicationListeners = new LinkedHashSet<>();
@@ -43,14 +41,7 @@ public abstract class AbstractApplicationEventMulticaster implements Application
         this.beanFactory = beanFactory;
     }
 
-    /**
-     * Return a Collection of ApplicationListeners matching the given
-     * event type. Non-matching listeners get excluded early.
-     * @param event the event to be propagated. Allows for excluding
-     * non-matching listeners early, based on cached matching information.
-     * @return a Collection of ApplicationListeners
-     * @see ApplicationListener
-     */
+
     protected Collection<ApplicationListener> getApplicationListeners(ApplicationEvent event) {
         LinkedList<ApplicationListener> allListeners = new LinkedList<ApplicationListener>();
         for (ApplicationListener<ApplicationEvent> listener : applicationListeners) {

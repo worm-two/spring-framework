@@ -1,17 +1,15 @@
 package cn.ming.springframework.context.support;
 
-import cn.bugstack.springframework.beans.factory.support.DefaultListableBeanFactory;
-import cn.bugstack.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+
+import cn.ming.springframework.beans.factory.support.DefaultListableBeanFactory;
+import cn.ming.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 
 /**
- * @author 小傅哥，微信：fustack
- * @description 抽象基类 XML 上下文 Convenient base class for {@link cn.bugstack.springframework.context.ApplicationContext}
- * implementations, drawing configuration from XML documents containing bean definitions
- * understood by an {@link XmlBeanDefinitionReader}.
- * @date 2022/3/10
- * @github https://github.com/fuzhengwei
- * @copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description: 抽象基类 XML 上下文
+ **/
 public abstract class AbstractXmlApplicationContext extends AbstractRefreshableApplicationContext {
 
     @Override
