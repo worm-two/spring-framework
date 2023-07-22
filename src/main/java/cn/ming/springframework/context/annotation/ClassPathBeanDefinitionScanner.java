@@ -1,32 +1,20 @@
 package cn.ming.springframework.context.annotation;
 
-import cn.bugstack.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
-import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
-import cn.bugstack.springframework.beans.factory.support.BeanDefinitionRegistry;
-import cn.bugstack.springframework.stereotype.Component;
+
 import cn.hutool.core.util.StrUtil;
+import cn.ming.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import cn.ming.springframework.beans.factory.config.BeanDefinition;
+import cn.ming.springframework.beans.factory.support.BeanDefinitionRegistry;
+import cn.ming.springframework.stereotype.Component;
 
 import java.util.Set;
 
 /**
- * A bean definition scanner that detects bean candidates on the classpath,
- * registering corresponding bean definitions with a given registry ({@code BeanFactory}
- * or {@code ApplicationContext}).
- * <p>
- * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- * 公众号：bugstack虫洞栈
- * Create by 小傅哥(fustack)
- */
-
-/**
- * @author 小傅哥，微信：fustack
- * @description A bean definition scanner that detects bean candidates on the classpath,
- * registering corresponding bean definitions with a given registry ({@code BeanFactory}
- * or {@code ApplicationContext}).
- * @date 2022/3/14
- * @github https://github.com/fuzhengwei
- * @copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description:
+ **/
 public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateComponentProvider {
 
     private BeanDefinitionRegistry registry;
