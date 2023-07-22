@@ -1,16 +1,14 @@
 package cn.ming.springframework.aop.framework;
 
-import cn.bugstack.springframework.aop.AdvisedSupport;
+
+import cn.ming.springframework.aop.AdvisedSupport;
 
 /**
- * @author 小傅哥，微信：fustack
- * @description Factory for AOP proxies for programmatic use, rather than via a bean
- * factory. This class provides a simple way of obtaining and configuring
- * AOP proxies in code.
- * @date 2022/3/14
- * @github https://github.com/fuzhengwei/CodeDesignTutorials
- * @Copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
+ * @Author: xuming
+ * @Date: 2023-07-22 10:42
+ * @Version: 1.0
+ * @Description:
+ **/
 public class ProxyFactory {
 
     private AdvisedSupport advisedSupport;

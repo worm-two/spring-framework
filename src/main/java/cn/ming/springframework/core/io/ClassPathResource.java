@@ -1,7 +1,8 @@
 package cn.ming.springframework.core.io;
 
-import cn.bugstack.springframework.util.ClassUtils;
+
 import cn.hutool.core.lang.Assert;
+import cn.ming.springframework.util.ClassUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +14,11 @@ import java.io.InputStream;
  * @date 2022/3/9
  * @github https://github.com/fuzhengwei
  * @copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
+ */
+
+/**
+ * @author xuming
+ * @
  */
 public class ClassPathResource implements Resource {
 
