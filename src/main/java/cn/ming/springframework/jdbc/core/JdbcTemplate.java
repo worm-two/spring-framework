@@ -1,11 +1,10 @@
 package cn.ming.springframework.jdbc.core;
 
+
 import cn.hutool.core.lang.Assert;
+import cn.ming.springframework.jdbc.UncategorizedSQLException;
 import cn.ming.springframework.jdbc.datasource.DataSourceUtils;
 import cn.ming.springframework.jdbc.support.JdbcAccessor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -21,9 +20,6 @@ import java.util.Map;
  * @Version: 1.0
  * @Description: TODO
  **/
-@NoArgsConstructor
-@Setter
-@Getter
 public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 
     private int fetchSize = -1;
@@ -32,10 +28,36 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 
     private int queryTimeout = -1;
 
+    public JdbcTemplate() {
+    }
 
     public JdbcTemplate(DataSource dataSource) {
         setDataSource(dataSource);
         afterPropertiesSet();
+    }
+
+    public int getFetchSize() {
+        return fetchSize;
+    }
+
+    public void setFetchSize(int fetchSize) {
+        this.fetchSize = fetchSize;
+    }
+
+    public int getMaxRows() {
+        return maxRows;
+    }
+
+    public void setMaxRows(int maxRows) {
+        this.maxRows = maxRows;
+    }
+
+    public int getQueryTimeout() {
+        return queryTimeout;
+    }
+
+    public void setQueryTimeout(int queryTimeout) {
+        this.queryTimeout = queryTimeout;
     }
 
     @Override
@@ -46,7 +68,15 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
             applyStatementSettings(stmt);
             return action.doInStatement(stmt);
         } catch (SQLException ex) {
-            throw new RuntimeException("StatementCallback", ex);
+            throw new UncategorizedSQLException("ConnectionCallback", getSql(action), ex);
+        }
+    }
+
+    private static String getSql(Object sqlProvider) {
+        if (sqlProvider instanceof SqlProvider) {
+            return ((SqlProvider) sqlProvider).getSql();
+        } else {
+            return null;
         }
     }
 
@@ -112,4 +142,5 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
             stat.setMaxRows(maxRows);
         }
     }
+
 }
