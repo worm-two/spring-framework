@@ -107,6 +107,12 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
         return result;
     }
 
+    @Override
+    public boolean containsBean(String name) {
+        return containsBeanDefinition(name);
+    }
+
+    protected abstract boolean containsBeanDefinition(String beanName);
 
     public List<BeanPostProcessor> getBeanPostProcessors() {
         return this.beanPostProcessors;
