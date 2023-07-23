@@ -12,8 +12,6 @@ import lombok.Getter;
  * @Version: 1.0
  * @Description:
  **/
-@AllArgsConstructor
-@Getter
 public abstract class AbstractBeanDefinitionReader implements BeanDefinitionReader {
 
     private final BeanDefinitionRegistry registry;
@@ -23,4 +21,20 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
     protected AbstractBeanDefinitionReader(BeanDefinitionRegistry registry) {
         this(registry, new DefaultResourceLoader());
     }
+
+    public AbstractBeanDefinitionReader(BeanDefinitionRegistry registry, ResourceLoader resourceLoader) {
+        this.registry = registry;
+        this.resourceLoader = resourceLoader;
+    }
+
+    @Override
+    public BeanDefinitionRegistry getRegistry() {
+        return registry;
+    }
+
+    @Override
+    public ResourceLoader getResourceLoader() {
+        return resourceLoader;
+    }
+
 }

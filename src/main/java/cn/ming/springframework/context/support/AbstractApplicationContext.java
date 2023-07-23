@@ -5,6 +5,8 @@ import cn.ming.springframework.beans.BeansException;
 import cn.ming.springframework.beans.factory.ConfigurableListableBeanFactory;
 import cn.ming.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import cn.ming.springframework.beans.factory.config.BeanPostProcessor;
+import cn.ming.springframework.beans.factory.support.BeanDefinitionRegistry;
+import cn.ming.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import cn.ming.springframework.context.ApplicationEvent;
 import cn.ming.springframework.context.ApplicationListener;
 import cn.ming.springframework.context.ConfigurableApplicationContext;
@@ -60,6 +62,20 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         finishRefresh();
     }
 
+    // 设置类型转换器、提前实例化单例Bean对象
+    protected void finishBeanFactoryInitialization(ConfigurableListableBeanFactory beanFactory) {
+        // 设置类型转换器
+        if (beanFactory.containsBean("conversionService")) {
+            Object conversionService = beanFactory.getBean("conversionService");
+            if (conversionService instanceof ConversionService) {
+                beanFactory.setConversionService((ConversionService) conversionService);
+            }
+        }
+
+        // 提前实例化单例Bean对象
+        beanFactory.preInstantiateSingletons();
+    }
+
     protected abstract void refreshBeanFactory() throws BeansException;
 
     protected abstract ConfigurableListableBeanFactory getBeanFactory();
@@ -68,6 +84,17 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         Map<String, BeanFactoryPostProcessor> beanFactoryPostProcessorMap = beanFactory.getBeansOfType(BeanFactoryPostProcessor.class);
         for (BeanFactoryPostProcessor beanFactoryPostProcessor : beanFactoryPostProcessorMap.values()) {
             beanFactoryPostProcessor.postProcessBeanFactory(beanFactory);
+        }
+
+        // 注册对象
+        if (beanFactory instanceof BeanDefinitionRegistry) {
+            BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
+            for (BeanFactoryPostProcessor postProcessor : beanFactoryPostProcessorMap.values()) {
+                if (postProcessor instanceof BeanDefinitionRegistryPostProcessor) {
+                    BeanDefinitionRegistryPostProcessor registryProcessor = (BeanDefinitionRegistryPostProcessor) postProcessor;
+                    registryProcessor.postProcessBeanDefinitionRegistry(registry);
+                }
+            }
         }
     }
 
@@ -131,6 +158,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
     }
 
     @Override
+    public boolean containsBean(String name) {
+        return getBeanFactory().containsBean(name);
+    }
+
+    @Override
     public void registerShutdownHook() {
         Runtime.getRuntime().addShutdownHook(new Thread(this::close));
     }
@@ -143,23 +175,5 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         // 执行销毁单例bean的销毁方法
         getBeanFactory().destroySingletons();
     }
-
-    @Override
-    public boolean containsBean(String name) {
-        return getBeanFactory().containsBean(name);
-    }
-
-    // 设置类型转换器、提前实例化单例Bean对象
-    protected void finishBeanFactoryInitialization(ConfigurableListableBeanFactory beanFactory) {
-        // 设置类型转换器
-        if (beanFactory.containsBean("conversionService")) {
-            Object conversionService = beanFactory.getBean("conversionService");
-            if (conversionService instanceof ConversionService) {
-                beanFactory.setConversionService((ConversionService) conversionService);
-            }
-        }
-
-        // 提前实例化单例Bean对象
-        beanFactory.preInstantiateSingletons();
-    }
 }
+
