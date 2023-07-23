@@ -1,66 +1,60 @@
 package cn.ming.springframework;
 
 
-import cn.ming.springframework.bean.Husband;
-import cn.ming.springframework.bean.StringToIntegerConverter;
+import cn.ming.springframework.aop.AdvisedSupport;
+import cn.ming.springframework.aop.TargetSource;
+import cn.ming.springframework.aop.aspectj.AspectJExpressionPointcut;
+import cn.ming.springframework.aop.framework.Cglib2AopProxy;
+import cn.ming.springframework.bean.JdbcService;
 import cn.ming.springframework.context.support.ClassPathXmlApplicationContext;
-import cn.ming.springframework.core.convert.converter.Converter;
-import cn.ming.springframework.core.convert.support.StringToNumberConverterFactory;
 import cn.ming.springframework.jdbc.core.JdbcTemplate;
+import cn.ming.springframework.jdbc.datasource.DataSourceTransactionManager;
+import cn.ming.springframework.tx.transaction.annotation.AnnotationTransactionAttributeSource;
+import cn.ming.springframework.tx.transaction.interceptor.TransactionInterceptor;
+import com.alibaba.druid.pool.DruidDataSource;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.Map;
+import javax.sql.DataSource;
+import java.sql.SQLException;
 
 public class ApiTest {
 
-    @Test
-    public void test_convert() {
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
-        Husband husband = applicationContext.getBean("husband", Husband.class);
-        System.out.println("测试结果：" + husband);
-    }
-
-    @Test
-    public void test_StringToIntegerConverter() {
-        StringToIntegerConverter converter = new StringToIntegerConverter();
-        Integer num = converter.convert("1234");
-        System.out.println("测试结果：" + num);
-    }
-
-    @Test
-    public void test_StringToNumberConverterFactory() {
-        StringToNumberConverterFactory converterFactory = new StringToNumberConverterFactory();
-
-        Converter<String, Integer> stringToIntegerConverter = converterFactory.getConverter(Integer.class);
-        System.out.println("测试结果：" + stringToIntegerConverter.convert("1234"));
-
-        Converter<String, Long> stringToLongConverter = converterFactory.getConverter(Long.class);
-        System.out.println("测试结果：" + stringToLongConverter.convert("1234"));
-    }
 
     private JdbcTemplate jdbcTemplate;
+    private JdbcService jdbcService;
+    private DataSource dataSource;
 
     @BeforeEach
     public void init() {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
         jdbcTemplate = applicationContext.getBean(JdbcTemplate.class);
-        System.out.println("jdbcTemplate = " + jdbcTemplate);
+        dataSource = applicationContext.getBean(DruidDataSource.class);
+        jdbcService = applicationContext.getBean(JdbcService.class);
     }
 
     @Test
-    public void execute(){
-        jdbcTemplate.execute("insert into user (id, userId, userHead, createTime, updateTime) values (100, '184172133','01_50', now(), now())");
-    }
+    public void test_Transaction() throws SQLException {
+        AnnotationTransactionAttributeSource transactionAttributeSource = new AnnotationTransactionAttributeSource();
+        transactionAttributeSource.findTransactionAttribute(jdbcService.getClass());
 
-    @Test
-    public void queryForListTest() {
-        List<Map<String, Object>> allResult = jdbcTemplate.queryForList("select * from user");
-        for (Map<String, Object> objectMap : allResult) {
-            System.out.println("测试结果：" + objectMap);
-        }
-    }
+        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
+        TransactionInterceptor interceptor = new TransactionInterceptor(transactionManager, transactionAttributeSource);
 
+        // 组装代理信息
+        AdvisedSupport advisedSupport = new AdvisedSupport();
+        advisedSupport.setTargetSource(new TargetSource(jdbcService));
+        advisedSupport.setMethodInterceptor(interceptor);
+        advisedSupport.setMethodMatcher(new AspectJExpressionPointcut("execution(* cn.ming.springframework.bean.JdbcService.*(..))"));
+
+        // 代理对象(Cglib2AopProxy)
+        JdbcService proxy_cglib = (JdbcService) new Cglib2AopProxy(advisedSupport).getProxy();
+
+        // 测试调用，有事务【不能同时提交2条有主键冲突的数据】
+        // proxy_cglib.saveData(jdbcTemplate);
+
+        // 测试调用，无事务【提交2条有主键冲突的数据成功一条】
+        proxy_cglib.saveDataNoTransaction(jdbcTemplate);
+    }
 }

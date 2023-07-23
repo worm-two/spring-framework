@@ -16,4 +16,5 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="jdbcService" class="cn.ming.springframework.bean.JdbcService"/>
 </beans>
